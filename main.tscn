@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://54fcsssnamkp"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
