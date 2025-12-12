@@ -240,3 +240,7 @@ func _on_area_3d_2_body_entered(body: Node3D) -> void:
 	if subwayd == true:
 		#Dialogic.start("subway")
 		subwayd = false
+
+
+func _on_area_3d_body_entered(body: Node3D) -> void:
+	get_tree().reload_current_scene()
