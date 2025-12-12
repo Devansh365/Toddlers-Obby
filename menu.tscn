@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://cms4ko0elyap2"]
+[gd_scene load_steps=4 format=3 uid="uid://cms4ko0elyap2"]
 
 [ext_resource type="Script" uid="uid://75d0av6gd8nh" path="res://menu.gd" id="1_lti8b"]
+[ext_resource type="Texture2D" uid="uid://d3wwklc0rpyoo" path="res://Screenshot 2025-12-13 023950.png" id="2_mae5d"]
+[ext_resource type="AudioStream" uid="uid://bhxxs08lforvf" path="res://menu-53679.mp3" id="2_ouk20"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -13,6 +15,19 @@ script = ExtResource("1_lti8b")
 metadata/_edit_use_anchors_ = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = -0.0230035
+anchor_top = -0.0462963
+anchor_right = 1.023
+anchor_bottom = 1.0463
+offset_bottom = 6.10352e-05
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_mae5d")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="Button" type="Button" parent="CanvasLayer"]
 anchors_preset = -1
@@ -46,6 +61,10 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/normal_font_size = 150
 text = "Toddlers Obby"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_ouk20")
+autoplay = true
 
 [connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]

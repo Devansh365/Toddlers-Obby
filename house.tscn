@@ -1,6 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://b7thyluugjbmq"]
+[gd_scene load_steps=15 format=3 uid="uid://b7thyluugjbmq"]
 
 [ext_resource type="PackedScene" uid="uid://cp4h4he2kieyy" path="res://scenes and scriptas/player.tscn" id="1_hfkix"]
+[ext_resource type="Material" uid="uid://bxpe2n2geiemq" path="res://water.tres" id="2_metfq"]
+[ext_resource type="AudioStream" uid="uid://dpdlinsd130gx" path="res://merx-market-song-33936.mp3" id="3_6syyc"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hfkix"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -14,6 +16,12 @@ background_mode = 2
 sky = SubResource("Sky_metfq")
 tonemap_mode = 2
 glow_enabled = true
+fog_enabled = true
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 7.65
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.3997
+volumetric_fog_albedo = Color(0, 0, 0, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_metfq"]
 
@@ -22,8 +30,6 @@ albedo_color = Color(0.72241, 0.393144, 9.62615e-07, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_metfq"]
 material = SubResource("StandardMaterial3D_hfkix")
-
-[sub_resource type="BoxMesh" id="BoxMesh_6syyc"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_metfq"]
 
@@ -34,6 +40,9 @@ size = Vector3(16.3795, 0.001, 3.56482)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6syyc"]
 size = Vector3(17.4382, 3.43665, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_hfkix"]
+material = ExtResource("2_metfq")
 
 [node name="house" type="Node3D"]
 
@@ -117,14 +126,15 @@ shape = SubResource("BoxShape3D_metfq")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000454636, 9.53674e-07, -0.0132906)
 mesh = SubResource("BoxMesh_metfq")
 
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="StaticBody3D9"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.000454636, 8.38798, -0.0132906)
+mesh = SubResource("BoxMesh_metfq")
+
 [node name="StaticBody3D2" type="StaticBody3D" parent="."]
 transform = Transform3D(3.61025, 0, 0, 0, 0.330517, 0, 0, 0, 9.51928, -14.0508, 0, 16.7834)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D2"]
 shape = SubResource("BoxShape3D_metfq")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D2"]
-mesh = SubResource("BoxMesh_6syyc")
 
 [node name="StaticBody3D3" type="StaticBody3D" parent="."]
 transform = Transform3D(3.51217, 0, 0, 0, 0.322616, 0, 0, 0, 6.52336, 0, 0, -14.07)
@@ -132,11 +142,8 @@ transform = Transform3D(3.51217, 0, 0, 0, 0.322616, 0, 0, 0, 6.52336, 0, 0, -14.
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D3"]
 shape = SubResource("BoxShape3D_metfq")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D3"]
-mesh = SubResource("BoxMesh_6syyc")
-
 [node name="Player" parent="." instance=ExtResource("1_hfkix")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.36965, 230.529)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.36965, -0.0826149)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.31239)
@@ -370,6 +377,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 243.881)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="enfing"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.963741, 3.4328, -7.50705)
 shape = SubResource("BoxShape3D_6syyc")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1000, 0, 0, 0, 3.385, 0, 0, 0, 1000, 0, -11.9743, 121.347)
+mesh = SubResource("BoxMesh_hfkix")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6syyc")
+autoplay = true
 
 [connection signal="body_entered" from="Area3D" to="Player" method="_on_area_3d_body_entered"]
 [connection signal="body_entered" from="enfing" to="Player" method="_on_enfing_body_entered"]
