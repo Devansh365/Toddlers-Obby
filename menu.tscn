@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://cms4ko0elyap2"]
+
+[ext_resource type="Script" uid="uid://75d0av6gd8nh" path="res://menu.gd" id="1_lti8b"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lti8b")
+metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.423611
+anchor_top = 0.512346
+anchor_right = 0.557292
+anchor_bottom = 0.617284
+text = "PLAY"
+metadata/_edit_use_anchors_ = true
+
+[node name="Button2" type="Button" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.423611
+anchor_top = 0.660494
+anchor_right = 0.557292
+anchor_bottom = 0.765432
+text = "QUIT"
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -527.0
+offset_top = -235.0
+offset_right = 583.0
+offset_bottom = -17.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/normal_font_size = 150
+text = "Toddlers Obby"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/Button2" to="." method="_on_button_2_pressed"]

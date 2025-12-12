@@ -120,7 +120,7 @@ func toypicked():
 	#$magiccoin.play()
 func coinplaced():
 	coinsinhand = coinsinhand - 1
-	coinui.text = "Total coins: " + str(coinsinhand)
+	coinui.text = "death count: " + str(coinsinhand)
 	#$magiccoin.play()
 	
 func magicalcoinpicked():
@@ -243,4 +243,10 @@ func _on_area_3d_2_body_entered(body: Node3D) -> void:
 
 
 func _on_area_3d_body_entered(body: Node3D) -> void:
+	
 	get_tree().reload_current_scene()
+
+
+func _on_enfing_body_entered(body: Node3D) -> void:
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	get_tree().change_scene_to_file("res://menu.tscn")

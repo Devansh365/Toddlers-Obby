@@ -19,6 +19,10 @@ config/icon="res://icon.svg"
 
 Sm="*res://Sm.gd"
 
+[display]
+
+window/size/mode=3
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/wakatime/plugin.cfg", "res://addons/zylann.hterrain/plugin.cfg")

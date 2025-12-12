@@ -179,6 +179,7 @@ text = "[F]Flashlight
 metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
 material = SubResource("ShaderMaterial_i3pqv")
 anchors_preset = 15
 anchor_right = 1.0
