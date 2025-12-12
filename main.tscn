@@ -1,9 +1,70 @@
-[gd_scene format=3 uid="uid://54fcsssnamkp"]
+[gd_scene load_steps=11 format=3 uid="uid://54fcsssnamkp"]
+
+[ext_resource type="PackedScene" uid="uid://cp4h4he2kieyy" path="res://scenes and scriptas/player.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://1ns5jx33ooi5" path="res://addons/zylann.hterrain/hterrain.gd" id="2_1bvp3"]
+[ext_resource type="Resource" uid="uid://bkbj4y2bvat4q" path="res://terrain work directory/data.hterrain" id="3_lquwl"]
+[ext_resource type="Script" uid="uid://bykrxdcwuojjl" path="res://addons/zylann.hterrain/hterrain_texture_set.gd" id="4_7mycd"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1bvp3"]
+sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+ground_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
+
+[sub_resource type="Sky" id="Sky_lquwl"]
+sky_material = SubResource("ProceduralSkyMaterial_1bvp3")
+
+[sub_resource type="Environment" id="Environment_7mycd"]
+background_mode = 2
+sky = SubResource("Sky_lquwl")
+tonemap_mode = 2
+glow_enabled = true
+fog_enabled = true
+volumetric_fog_density = 0.031
+
+[sub_resource type="BoxMesh" id="BoxMesh_7dm0k"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ig7tw"]
+
+[sub_resource type="Resource" id="Resource_272bh"]
+script = ExtResource("4_7mycd")
+mode = 0
+textures = [[], []]
 
 [node name="Node3D" type="Node3D"]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7mycd")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
 [node name="floor" type="StaticBody3D" parent="."]
+transform = Transform3D(7.66826, 0, 0, 0, 0.24147, 0, 0, 0, 6.48138, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+mesh = SubResource("BoxMesh_7dm0k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+shape = SubResource("BoxShape3D_ig7tw")
+
+[node name="Player" parent="." instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 30.1687, 38.0801, 34.6906)
+
+[node name="HTerrain" type="Node3D" parent="."]
+script = ExtResource("2_1bvp3")
+_terrain_data = ExtResource("3_lquwl")
+chunk_size = 32
+collision_enabled = true
+collision_layer = 1
+collision_mask = 1
+shader_type = "Classic4Lite"
+custom_shader = null
+custom_globalmap_shader = null
+texture_set = SubResource("Resource_272bh")
+render_layers = 1
+cast_shadow = 1
+shader_params/u_ground_uv_scale = 20
+shader_params/u_depth_blending = true
+shader_params/u_triplanar = null
+shader_params/u_tile_reduction = null
+metadata/_custom_type_script = "uid://1ns5jx33ooi5"

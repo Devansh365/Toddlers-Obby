@@ -1,0 +1,253 @@
+[gd_scene load_steps=11 format=3 uid="uid://cp4h4he2kieyy"]
+
+[ext_resource type="Script" uid="uid://dm0hbcmko1g8r" path="res://scenes and scriptas/player.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://mb0xx85mkx2e" path="res://scenes and scriptas/ray_cast_3d.gd" id="2_i3pqv"]
+[ext_resource type="AudioStream" uid="uid://cu4clpii7n53u" path="res://scenes and scriptas/feetpics.mp3" id="4_hqtel"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sh265"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_4flbx"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i3pqv"]
+
+[sub_resource type="Animation" id="Animation_sweqy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/fade:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_hqtel"]
+resource_name = "fadee out"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/fade:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.43605),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/fade:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3.88674),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_2hs0m"]
+resource_name = "fadein"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/fade:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/fade:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 2.65502),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1jxqw"]
+_data = {
+&"RESET": SubResource("Animation_sweqy"),
+&"fadee out": SubResource("Animation_hqtel"),
+&"fadein": SubResource("Animation_2hs0m")
+}
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_4flbx")
+
+[node name="head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.794743, -0.167044)
+
+[node name="Camera3D" type="Camera3D" parent="head"]
+
+[node name="RayCast3D" type="RayCast3D" parent="head/Camera3D"]
+transform = Transform3D(3.09406, 0, 0, 0, -1.10715e-07, -3.43854, 0, 2.53287, -1.50303e-07, 0, 0, 0)
+script = ExtResource("2_i3pqv")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="head/Camera3D"]
+light_energy = 2.674
+light_volumetric_fog_energy = 0.0
+spot_range = 45.345
+spot_angle = 15.65
+
+[node name="OmniLight3D" type="OmniLight3D" parent="head/Camera3D"]
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("CapsuleMesh_sh265")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_4flbx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="interact" type="RichTextLabel" parent="CanvasLayer"]
+offset_right = 305.0
+offset_bottom = 78.0
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.517184, 0.517184, 0.517184, 1)
+theme_override_colors/font_shadow_color = Color(0.758192, 0.758192, 0.758192, 1)
+theme_override_font_sizes/normal_font_size = 51
+text = "[E] Interact"
+
+[node name="coins" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.797743
+anchor_top = 0.189815
+anchor_right = 0.993923
+anchor_bottom = 0.270062
+theme_override_colors/default_color = Color(0.771066, 0.0682009, 0.375694, 1)
+theme_override_font_sizes/normal_font_size = 31
+text = "total coins
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="offering" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+anchors_preset = -1
+anchor_left = 0.824653
+anchor_top = 0.148148
+anchor_right = 0.903646
+anchor_bottom = 0.228395
+theme_override_colors/default_color = Color(0.771066, 0.0682009, 0.375694, 1)
+theme_override_font_sizes/normal_font_size = 31
+text = "/6"
+metadata/_edit_use_anchors_ = true
+
+[node name="coins2" type="RichTextLabel" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.825521
+anchor_top = 0.00925926
+anchor_right = 1.0217
+anchor_bottom = 0.16358
+theme_override_colors/default_color = Color(0.000416817, 3.19116e-06, 8.64412e-05, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.408329, 0.408329, 0.408329, 1)
+theme_override_font_sizes/normal_font_size = 33
+text = "[F]Flashlight
+[P]Reset
+"
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_i3pqv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 9.0
+offset_right = 9.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="fade" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
+
+[node name="ending 1" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -433.0
+offset_top = -140.0
+offset_right = 433.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.517184, 0.517184, 0.517184, 1)
+theme_override_colors/font_shadow_color = Color(0.758192, 0.758192, 0.758192, 1)
+theme_override_font_sizes/normal_font_size = 200
+text = "Ending 1"
+
+[node name="ending 2" type="RichTextLabel" parent="CanvasLayer"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -433.0
+offset_top = -140.0
+offset_right = 433.0
+offset_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.517184, 0.517184, 0.517184, 1)
+theme_override_colors/font_shadow_color = Color(0.758192, 0.758192, 0.758192, 1)
+theme_override_font_sizes/normal_font_size = 200
+text = "Ending 2"
+
+[node name="magiccoin" type="AudioStreamPlayer" parent="."]
+volume_db = 5.195
+
+[node name="footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_hqtel")
+
+[node name="footsteps1" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.1986, 0)
+stream = ExtResource("4_hqtel")
+volume_db = 9.985
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1jxqw")
+}
